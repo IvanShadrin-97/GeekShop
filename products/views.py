@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 from products.models import Products, ProductCategory
-import pickle
 import datetime
 
 
@@ -14,13 +13,13 @@ def index(request):
 
 
 def products(request):
-    products_from_sql = Products.objects.values_list('image', 'name', 'price', 'short_description')
-    convert_to_list_dict = Products.objects.all()
-    convert_to_list_dict.query = pickle.loads(pickle.dumps(products_from_sql.query))
+    products = Products.objects.all()
+    categories = ProductCategory.objects.all()
 
     context = {
         'title': 'Products',
         'h1_geekShop': 'geekShop',
-        'product': convert_to_list_dict,
+        'product': products,
+        'category': categories
     }
     return render(request, 'products/products.html', context)
