@@ -7,7 +7,6 @@ import datetime
 def index(request):
     context = {
         'title': 'GeekShop',
-        'date': datetime.datetime.now(),
     }
     return render(request, 'products/index.html', context)
 
