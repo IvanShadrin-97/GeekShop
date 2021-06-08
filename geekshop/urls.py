@@ -24,7 +24,8 @@ from products.views import index, products
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
-    path('products/', include("products.urls" , namespace='products')),
+    path('users/', include('users.urls', namespace='users')),
+    path('products/', include('products.urls' , namespace='products')),
 ]
 
 if settings.DEBUG:
