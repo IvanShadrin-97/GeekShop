@@ -1,7 +1,6 @@
 from django.shortcuts import render
 
 from products.models import Products, ProductCategory
-import datetime
 
 
 def index(request):
