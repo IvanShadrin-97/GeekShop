@@ -4,7 +4,7 @@ window.onload = function () {
         $.ajax({
                 url: '/baskets/basket_edit/' + targetHref.name + '/' + targetHref.value + '/',
                 success: function (data) {
-                    $('.basket-list').html(data.result)
+                    $('.basket_list').html(data.result)
                 }
         });
         event.preventDefault()
