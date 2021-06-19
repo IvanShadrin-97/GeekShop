@@ -25,8 +25,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', index, name='index'),
     path('users/', include('users.urls', namespace='users')),
-    path('products/', include('products.urls' , namespace='products')),
-    path('baskets/', include('baskets.urls' , namespace='baskets')),
+    path('products/', include('products.urls', namespace='products')),
+    path('baskets/', include('baskets.urls', namespace='baskets')),
+    path('admin-staf/', include('admins.urls', namespace='admins')),
+
 ]
 
 if settings.DEBUG:
