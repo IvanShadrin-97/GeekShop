@@ -16,7 +16,8 @@
                 <h1 class="my-4">GeekShop</h1>
                 <div class="list-group">
                     {% for categories in category %}
-                        <a href="#" class="list-group-item">{{ categories.name }}</a>
+                        <a href="{% url 'products:category' categories.id %}"
+                           class="list-group-item">{{ categories.name }}</a>
                     {% endfor %}
                 </div>
 
@@ -84,14 +85,20 @@
 
                 <nav aria-label="Page navigation example">
                     <ul class="pagination justify-content-center">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                        <li class="page-item
+                        {% if not product.has_previous %} disabled {% endif %}">
+                            <a class="page-link"
+                               href="{% if product.has_previous %}
+                               {% url 'products:page' product.previous_page_number %}{% else %}#{% endif %} "
+                               tabindex="-1" aria-disabled="true">Предыдущия</a>
                         </li>
-                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    {% for page in product.paginator.page_range %}
                         <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
+                            <a class="page-link" href="{% url 'products:page' page %}">{{ page }}</a>
+                        </li>
+                    {% endfor %}
+                        <li class="page-item">
+                            <a class="page-link {% if not product.has_next %} disabled {% endif %}" href="#">Next</a>
                         </li>
                     </ul>
                 </nav>
