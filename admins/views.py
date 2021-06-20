@@ -7,18 +7,18 @@ from users.models import User
 from admins.forms import AdminUserCreationForm, AdminUserUpdateForm
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def index(request):
     return render(request, 'admins/admin.html')
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def admin_users(request):
     context = {'title': 'Admin | Users', 'users': User.objects.all()}
     return render(request, 'admins/admin-user-read.html', context)
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def admin_user_create(request):
     if request.method == 'POST':
         form = AdminUserCreationForm(data=request.POST, files=request.FILES)
@@ -35,7 +35,7 @@ def admin_user_create(request):
     return render(request, 'admins/admin-user-create.html', context)
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def admin_user_update(request, id):
     selected_user = User.objects.get(id=id)
     if request.method == 'POST':
@@ -53,7 +53,7 @@ def admin_user_update(request, id):
     return render(request, 'admins/admin-user-update-delete.html', context)
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def admin_user_delete(request, id):
     selected_user = User.objects.get(id=id)
     selected_user.is_active = False
@@ -61,7 +61,7 @@ def admin_user_delete(request, id):
     return HttpResponseRedirect(reverse('admins:admin_users'))
 
 
-user_passes_test(lambda u: u.is_superuser)
+@user_passes_test(lambda u: u.is_superuser)
 def admin_user_recover(request):
     selected_user = User.objects.get(id=id)
     selected_user.is_active = True
